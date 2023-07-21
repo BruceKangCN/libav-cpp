@@ -1,0 +1,62 @@
+---
+# - performance-unnecessary-value-param is disabled because it duplicate
+#   modernize-pass-by-value.
+Checks: >
+  -*,
+  bugprone-*,
+  -bugprone-branch-clone,
+  -bugprone-easily-swappable-parameters,
+  -bugprone-narrowing-conversions,
+  -bugprone-implicit-widening-of-multiplication-result,
+  cppcoreguidelines-*,
+  -cppcoreguidelines-avoid-magic-numbers,
+  -cppcoreguidelines-pro-bounds-pointer-arithmetic,
+  -cppcoreguidelines-pro-bounds-array-to-pointer-decay,
+  -cppcoreguidelines-pro-type-vararg,
+  -cppcoreguidelines-owning-memory,
+  misc-definitions-in-headers,
+  misc-misplaced-const,
+  misc-redundant-expression,
+  misc-static-assert,
+  misc-unconventional-assign-operator,
+  misc-uniqueptr-reset-release,
+  misc-unused-*,
+  modernize-*,
+  -modernize-avoid-c-arrays,
+  -modernize-return-braced-init-list,
+  -modernize-use-trailing-return-type,
+  performance-*,
+  -performance-unnecessary-value-param,
+  readability-*,
+  -readability-implicit-bool-conversion,
+  -readability-function-cognitive-complexity,
+  -readability-identifier-length,
+  -readability-suspicious-call-argument,
+  -readability-container-data-pointer
+CheckOptions:
+  - { key: readability-magic-numbers.IgnoredIntegerValues, value: 1 }
+  - { key: readability-function-size.StatementThreshold, value: 50 }
+  - { key: readability-function-size.ParameterThreshold, value: 5 }
+  - { key: readability-identifier-naming.ClassCase, value: CamelCase }
+  - { key: readability-identifier-naming.PrivateMemberPrefix, value: m_ }
+  - { key: readability-identifier-naming.PrivateMemberCase, value: camelBack }
+  - { key: readability-identifier-naming.ClassMethodCase, value: camelBack }
+  - { key: readability-identifier-naming.ConstexprVariableCase, value: UPPER_CASE }
+  - { key: readability-identifier-naming.EnumConstantCase, value: UPPER_CASE }
+  - { key: readability-identifier-naming.ScopedEnumConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.FunctionCase, value: camelBack }
+  - { key: readability-identifier-naming.GlobalConstantCase, value: UPPER_CASE }
+  - { key: readability-identifier-naming.MacroDefinitionCase, value: UPPER_CASE }
+  - { key: readability-identifier-naming.MethodCase, value: camelBack }
+  - { key: readability-identifier-naming.NamespaceCase, value: lower_case }
+  - { key: readability-identifier-naming.ParameterCase, value: camelBack }
+  - { key: readability-identifier-naming.ParameterIgnoredRegexp, value: '^[A-Z]{1,2}$' }
+  - { key: readability-identifier-naming.ScopedEnumConstantCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypedefPrefix, value: hesa_ }
+  - { key: readability-identifier-naming.TypedefCase, value: CamelCase }
+  - { key: readability-identifier-naming.TypeTemplateParameterCase, value: CamelCase }
+  - { key: readability-identifier-naming.ValueTemplateParameterCase, value: camelBack }
+  - { key: readability-identifier-naming.VariableCase, value: camelBack }
+  - { key: readability-identifier-naming.VariableIgnoredRegexp, value: '^[A-Z]$' }
+FormatStyle: file
+...
