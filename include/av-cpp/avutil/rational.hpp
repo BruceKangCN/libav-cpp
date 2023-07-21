@@ -50,7 +50,7 @@ public:
 
     [[nodiscard]] Rational inv() const noexcept
     {
-        return Rational(m_v.den, m_v.num);
+        return av_inv_q(m_v);
     }
 
     [[nodiscard]] int nearer(const Rational& a, const Rational& b) const noexcept
