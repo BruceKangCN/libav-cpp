@@ -106,6 +106,6 @@ template <typename T>
 
 constexpr std::size_t FOURCC_MAX_STRING_SIZE = AV_FOURCC_MAX_STRING_SIZE;
 
-LIBAV_CPP_PUBLIC [[nodiscard]] std::string fourcc2str(std::uint32_t fourcc);
+[[nodiscard]] LIBAV_CPP_PUBLIC std::string fourcc2str(std::uint32_t fourcc);
 
 } // namespace av
