@@ -62,16 +62,16 @@ enum class PictureType {
     return av_get_picture_type_char(static_cast<AVPictureType>(pictureType));
 }
 
-constexpr std::size_t LAMBDA_SHIFT = FF_LAMBDA_SHIFT;
-constexpr std::size_t LAMBDA_SCALE = std::size_t(1) << LAMBDA_SHIFT;
-constexpr std::size_t QP2LAMBDA = FF_QP2LAMBDA;
-constexpr std::size_t LAMBDA_MAX = FF_LAMBDA_MAX;
+inline constexpr std::size_t LAMBDA_SHIFT = FF_LAMBDA_SHIFT;
+inline constexpr std::size_t LAMBDA_SCALE = std::size_t(1) << LAMBDA_SHIFT;
+inline constexpr std::size_t QP2LAMBDA = FF_QP2LAMBDA;
+inline constexpr std::size_t LAMBDA_MAX = FF_LAMBDA_MAX;
 
-constexpr std::size_t QUALITY_SCALE = FF_QUALITY_SCALE;
+inline constexpr std::size_t QUALITY_SCALE = FF_QUALITY_SCALE;
 
-constexpr auto NOPTS_VALUE = AV_NOPTS_VALUE;
-constexpr std::size_t TIME_BASE = AV_TIME_BASE;
-constexpr auto TIME_BASE_Q = Rational(AV_TIME_BASE_Q);
+inline constexpr auto NOPTS_VALUE = AV_NOPTS_VALUE;
+inline constexpr std::size_t TIME_BASE = AV_TIME_BASE;
+inline constexpr auto TIME_BASE_Q = Rational(AV_TIME_BASE_Q);
 
 // TODO:
 //     error (exception)
@@ -104,7 +104,7 @@ template <typename T>
     return av_get_time_base_q();
 }
 
-constexpr std::size_t FOURCC_MAX_STRING_SIZE = AV_FOURCC_MAX_STRING_SIZE;
+inline constexpr std::size_t FOURCC_MAX_STRING_SIZE = AV_FOURCC_MAX_STRING_SIZE;
 
 [[nodiscard]] LIBAV_CPP_PUBLIC std::string fourcc2str(std::uint32_t fourcc);
 
