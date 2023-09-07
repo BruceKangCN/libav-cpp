@@ -29,6 +29,12 @@ public:
     constexpr Rational& operator=(const Rational&) = default;
     constexpr Rational& operator=(Rational&&) = default;
 
+    constexpr Rational(AVRational r)
+        : m_v(r)
+    {
+        // nothing
+    }
+
     [[nodiscard]] operator AVRational() const noexcept
     {
         return m_v;
@@ -36,12 +42,6 @@ public:
 
     constexpr Rational(int num, int den) noexcept
         : m_v(AVRational { num, den })
-    {
-        // nothing
-    }
-
-    constexpr Rational(AVRational r) noexcept
-        : m_v(r)
     {
         // nothing
     }
