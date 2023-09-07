@@ -29,6 +29,11 @@ public:
     constexpr Rational& operator=(const Rational&) = default;
     constexpr Rational& operator=(Rational&&) = default;
 
+    [[nodiscard]] operator AVRational() const noexcept
+    {
+        return m_v;
+    }
+
     constexpr Rational(int num, int den) noexcept
         : m_v(AVRational { num, den })
     {
@@ -86,14 +91,10 @@ static_assert(sizeof(Rational) == sizeof(AVRational));
     return av_cmp_q(a.m_v, b.m_v);
 }
 
-#if __cplusplus >= 202002L
-
 [[nodiscard]] inline int operator<=>(const Rational& a, const Rational& b)
 {
     return cmpQ(a, b);
 }
-
-#endif /* C++20 */
 
 inline bool reduce(int& dstNum, int& dstDen, std::int64_t num, std::int64_t den, int64_t max)
 {
