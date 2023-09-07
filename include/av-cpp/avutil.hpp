@@ -74,10 +74,10 @@ inline constexpr std::size_t TIME_BASE = AV_TIME_BASE;
 inline constexpr auto TIME_BASE_Q = Rational(AV_TIME_BASE_Q);
 
 // TODO:
-//     error (exception)
 //     mathemmatics
 //     log
 //     pixfmt
+//     ...
 
 // TODO: is this useful?
 [[nodiscard]] inline void* xIfNull(const void* p, const void* x) noexcept
