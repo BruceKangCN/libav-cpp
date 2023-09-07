@@ -1,6 +1,6 @@
 project('libav-cpp', 'cpp',
   license: ['MIT', 'Apache-2.0'],
-  meson_version: '>= 0.60',
+  meson_version: '>= 0.59',
   version: '0.1.0',
   default_options : [
     'warning_level=3',
@@ -18,7 +18,7 @@ libav_dep = [
   dependency('libavfilter', include_type: 'system'),
   dependency('libavformat', include_type: 'system'),
   dependency('libavutil', include_type: 'system'),
-  dependency('libpostproc', include_type: 'system'),
+  # postproc is GPL licensed so it is not included
   dependency('libswresample', include_type: 'system'),
   dependency('libswscale', include_type: 'system'),
 ]
@@ -43,7 +43,7 @@ libav_cpp_dep = declare_dependency(
   link_with: lib,
 )
 
-install_subdir('include/av', install_dir: get_option('includedir'))
+install_subdir('include/av-cpp', install_dir: get_option('includedir'))
 
 pkg = import('pkgconfig')
 pkg.generate(

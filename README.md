@@ -1,6 +1,6 @@
 # LIBAV-CPP
 
-C++ wrapper for libAV. Still under early development.
+C++ wrapper for libAV. Still under early development. Note: `postproc` is GPL licensed so it is not included.
 
 ## Features
 
@@ -16,5 +16,9 @@ C++ wrapper for libAV. Still under early development.
 
 ## Requirements
 
-- C++ compiler supporting C++17
+- C++ compiler supporting C++20
 - libAV
+
+## License
+
+MIT or Apache-2.0
