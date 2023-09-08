@@ -1,88 +1,85 @@
+#include <ios>
+#include <stdexcept>
+
 #include <av-cpp/avutil/common.hpp>
 
 namespace av {
 
-Exception::Exception(int no) noexcept
-    : m_no(no)
+void throwOnError(int code)
 {
-    // nothing
-}
-
-const char* Exception::what() const noexcept
-{
-    switch (m_no) {
+    switch (code) {
     case 0:
-        return  "No error";
+        break;
     case AVERROR(EPERM):
-        return "Operation not permitted";
+        throw std::system_error({ EPERM, std::system_category() }, "Operation not permitted");
     case AVERROR(ENOENT):
-        return "No such file or directory";
+        throw std::ios_base::failure("No such file or directory");
     case AVERROR(ESRCH):
-        return "No such process";
+        throw std::system_error({ ESRCH, std::system_category() }, "No such process");
     case AVERROR(EINTR):
-        return " Interrupted system call";
+        throw std::system_error({ EINTR, std::system_category() }, "Interrupted system call");
     case AVERROR(EIO):
-        return "I/O error";
+        throw std::ios_base::failure("I/O error");
     case AVERROR(ENXIO):
-        return "No such device or address";
+        throw std::ios_base::failure("No such device or address");
     case AVERROR(E2BIG):
-        return "Argument list too long";
+        throw std::length_error("Argument list too long");
     case AVERROR(ENOEXEC):
-        return "Exec format error";
+        throw std::system_error({ ENOEXEC, std::system_category() }, "Exec format error");
     case AVERROR(EBADF):
-        return "Bad file number";
+        throw std::ios_base::failure("Bad file number");
     case AVERROR(ECHILD):
-        return "No child processes";
+        throw std::system_error({ ESRCH, std::system_category() }, "No child processes");
     case AVERROR(EAGAIN):
-        return "Try again";
+        throw std::system_error({ EAGAIN, std::system_category() }, "Try Again");
     case AVERROR(ENOMEM):
-        return "Out of memory";
+        throw std::bad_alloc();
     case AVERROR(EACCES):
-        return "Permission denied";
+        throw std::system_error({ EACCES, std::system_category() }, "Permission denied");
     case AVERROR(EFAULT):
-        return "Bad address";
+        throw std::system_error({ EFAULT, std::system_category() }, "Bad address");
     case AVERROR(ENOTBLK):
-        return "Block device required";
+        throw std::ios_base::failure("Block device required");
     case AVERROR(EBUSY):
-        return "Device or resource busy";
+        throw std::ios_base::failure("Device or resource busy");
     case AVERROR(EEXIST):
-        return "File exists";
+        throw std::ios_base::failure("File exists");
     case AVERROR(EXDEV):
-        return "Cross-device link";
+        throw std::ios_base::failure("Cross-device link");
     case AVERROR(ENODEV):
-        return "No such device";
+        throw std::ios_base::failure("No such device");
     case AVERROR(ENOTDIR):
-        return "Not a directory";
+        throw std::ios_base::failure("Not a directory");
     case AVERROR(EISDIR):
-        return "Is a directory";
+        throw std::ios_base::failure("Is a director");
     case AVERROR(EINVAL):
-        return "Invalid argument";
+        throw std::invalid_argument("Invalid argument");
     case AVERROR(ENFILE):
-        return "File table overflow";
+        throw std::ios_base::failure("File table overflow");
     case AVERROR(EMFILE):
-        return "Too many open files";
+        throw std::ios_base::failure("Too many open files");
     case AVERROR(ENOTTY):
-        return "Not a typewritter";
+        throw std::ios_base::failure("Not a typewritter");
     case AVERROR(ETXTBSY):
-        return "Text file busy";
+        throw std::ios_base::failure("Text file busy");
     case AVERROR(EFBIG):
-        return "File too large";
+        throw std::ios_base::failure("File too large");
     case AVERROR(ENOSPC):
-        return "No space left on device";
+        throw std::ios_base::failure("No space left on device");
     case AVERROR(ESPIPE):
-        return "Illegal seek";
+        throw std::ios_base::failure("Illegal seek");
     case AVERROR(EROFS):
-        return "Read-only file system";
+        throw std::ios_base::failure("Read-only file system");
     case AVERROR(EMLINK):
-        return "Too many links";
+        throw std::ios_base::failure("Too many links");
     case AVERROR(EPIPE):
-        return "Broken pipe";
+        throw std::ios_base::failure("Broken pipe");
     case AVERROR(EDOM):
-        return "Math argument out of domain of func";
+        throw std::domain_error("Math argument out of domain of func");
     case AVERROR(ERANGE):
-        return "Math result not representable";
+        throw std::out_of_range("Math result not representable");
     default:
-        return "Unknown error";
+        throw std::runtime_error("Unknown error");
     }
 }
 

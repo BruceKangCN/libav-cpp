@@ -68,26 +68,12 @@ BufferRef BufferRef::create(std::vector<std::uint8_t>& data,
 
 void BufferRef::makeWritable()
 {
-    switch (auto ret = av_buffer_make_writable(&m_v); ret) {
-    case 0:
-        break;
-    case AVERROR(ENOMEM):
-        throw std::bad_alloc();
-    default:
-        throw Exception(ret);
-    }
+    throwOnError(av_buffer_make_writable(&m_v));
 }
 
 void BufferRef::realloc(std::size_t size)
 {
-    switch (auto ret = av_buffer_realloc(&m_v, size); ret) {
-    case 0:
-        break;
-    case AVERROR(ENOMEM):
-        throw std::bad_alloc();
-    default:
-        throw Exception(ret);
-    }
+    throwOnError(av_buffer_realloc(&m_v, size));
 }
 
 BufferPool::BufferPool(std::size_t size, AVBufferRef* (*alloc)(std::size_t size))
