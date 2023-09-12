@@ -1,6 +1,6 @@
 src += files([
     'avutil/avutil.cpp',
-    'avutil/common.cpp',
+    'avutil/error.cpp',
     'avutil/rational.cpp',
     'avutil/buffer.cpp',
 ])

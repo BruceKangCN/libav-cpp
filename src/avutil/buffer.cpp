@@ -1,10 +1,7 @@
-#include <cstdint>
 #include <new>
 
-#include <libavutil/common.h>
-
 #include <av-cpp/avutil/buffer.hpp>
-#include <av-cpp/avutil/common.hpp>
+#include <av-cpp/avutil/error.hpp>
 
 namespace av {
 

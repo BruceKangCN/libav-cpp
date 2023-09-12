@@ -4,7 +4,7 @@
 #include <exception>
 
 extern "C" {
-#include <libavutil/common.h>
+#include <libavutil/error.h>
 }
 
 #include <av-cpp/def.h>

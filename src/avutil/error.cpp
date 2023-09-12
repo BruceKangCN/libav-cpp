@@ -1,7 +1,8 @@
 #include <ios>
 #include <stdexcept>
+#include <string>
 
-#include <av-cpp/avutil/common.hpp>
+#include <av-cpp/avutil/error.hpp>
 
 namespace av {
 

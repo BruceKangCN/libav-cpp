@@ -74,6 +74,10 @@ inline constexpr std::size_t TIME_BASE = AV_TIME_BASE;
 inline constexpr auto TIME_BASE_Q = Rational(AV_TIME_BASE_Q);
 
 // TODO:
+//     channel layout?
+//     colorspace?
+//     detection bbox?
+//
 //     mathemmatics
 //     log
 //     pixfmt
