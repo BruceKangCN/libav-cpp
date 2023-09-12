@@ -8,6 +8,7 @@ extern "C" {
 #include <libavutil/buffer.h>
 }
 
+#include <av-cpp/avutil/error.hpp>
 #include <av-cpp/def.h>
 
 namespace av {
@@ -43,10 +44,22 @@ public:
         return m_v;
     }
 
-    void replace(const BufferRef& other);
+    void replace(const BufferRef& other)
+    {
+        if (av_buffer_replace(&m_v, other.m_v) != 0) {
+            throw std::bad_alloc();
+        }
+    }
 
-    static BufferRef create(std::vector<std::uint8_t>& data,
-        void (*free)(void*, std::uint8_t*), void* opaque, int flags);
+    [[nodiscard]] static BufferRef create(std::vector<std::uint8_t>& data,
+        void (*free)(void*, std::uint8_t*), void* opaque, int flags)
+    {
+        auto* ret = av_buffer_create(data.data(), data.size(), free, opaque, flags);
+        if (!ret) {
+            throw std::bad_alloc();
+        }
+        return ret;
+    }
 
     [[nodiscard]] bool writable() const noexcept
     {
@@ -67,9 +80,15 @@ public:
         return av_buffer_get_ref_count(m_v);
     }
 
-    void makeWritable();
+    void makeWritable()
+    {
+        throwOnError(av_buffer_make_writable(&m_v));
+    }
 
-    void realloc(std::size_t size);
+    void realloc(std::size_t size)
+    {
+        throwOnError(av_buffer_realloc(&m_v, size));
+    }
 
 private:
     AVBufferRef* m_v;
@@ -95,7 +114,14 @@ public:
         return m_v;
     }
 
-    [[nodiscard]] BufferRef get();
+    [[nodiscard]] BufferRef get()
+    {
+        auto* ret = av_buffer_pool_get(m_v);
+        if (!ret) {
+            throw std::bad_alloc();
+        }
+        return ret;
+    }
 
 private:
     AVBufferPool* m_v;

@@ -1,7 +1,6 @@
 #include <new>
 
 #include <av-cpp/avutil/buffer.hpp>
-#include <av-cpp/avutil/error.hpp>
 
 namespace av {
 
@@ -46,33 +45,6 @@ BufferRef& BufferRef::operator=(const BufferRef& ref)
     return *this;
 }
 
-void BufferRef::replace(const BufferRef& other)
-{
-    if (av_buffer_replace(&m_v, other.m_v) != 0) {
-        throw std::bad_alloc();
-    }
-}
-
-BufferRef BufferRef::create(std::vector<std::uint8_t>& data,
-    void (*free)(void*, std::uint8_t*), void* opaque, int flags)
-{
-    auto* ret = av_buffer_create(data.data(), data.size(), free, opaque, flags);
-    if (!ret) {
-        throw std::bad_alloc();
-    }
-    return ret;
-}
-
-void BufferRef::makeWritable()
-{
-    throwOnError(av_buffer_make_writable(&m_v));
-}
-
-void BufferRef::realloc(std::size_t size)
-{
-    throwOnError(av_buffer_realloc(&m_v, size));
-}
-
 BufferPool::BufferPool(std::size_t size, AVBufferRef* (*alloc)(std::size_t size))
     : m_v(av_buffer_pool_init(size, alloc))
 {
@@ -99,15 +71,6 @@ BufferPool::BufferPool(AVBufferPool* pool)
     : m_v(pool)
 {
     // nothing
-}
-
-BufferRef BufferPool::get()
-{
-    auto* ret = av_buffer_pool_get(m_v);
-    if (!ret) {
-        throw std::bad_alloc();
-    }
-    return ret;
 }
 
 } // namespace av
