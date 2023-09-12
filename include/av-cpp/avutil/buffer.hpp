@@ -12,6 +12,8 @@ extern "C" {
 
 namespace av {
 
+// TODO: make some functions inline
+
 class LIBAV_CPP_PUBLIC BufferRef {
 public:
     enum class Flag {

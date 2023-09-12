@@ -77,10 +77,13 @@ inline constexpr auto TIME_BASE_Q = Rational(AV_TIME_BASE_Q);
 //     channel layout?
 //     colorspace?
 //     detection bbox?
+//     fifo?
+//     video enc params?
 //
-//     mathemmatics
-//     log
 //     pixfmt
+//     dict
+//     opt
+//     imgutils
 //     ...
 
 // TODO: is this useful?

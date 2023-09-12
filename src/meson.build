@@ -3,4 +3,5 @@ src += files([
     'avutil/error.cpp',
     'avutil/rational.cpp',
     'avutil/buffer.cpp',
+    'avutil/frame.cpp',
 ])
